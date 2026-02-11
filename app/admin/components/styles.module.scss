@@ -1,0 +1,106 @@
+@use '@/shared/config/styles/vars';
+
+.form {
+  display: flex;
+  flex-direction: row;
+  gap: vars.$pd2;
+  align-items: center;
+  max-width: 900px;
+  padding: vars.$pd5 0;
+  .btn {
+    height: 40px;
+    align-self: flex-end;
+  }
+}
+.filterPanel {
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
+  align-items: center;
+  // max-width: 900px;
+  padding-top: vars.$pd5;
+
+  .btnBox {
+    display: flex;
+    flex-direction: row;
+    gap: vars.$pd;
+  }
+
+  .checkbox {
+    display: flex;
+    flex-direction: row;
+    gap: vars.$pd2;
+  }
+}
+.previewMovies {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.movies {
+  display: flex;
+  gap: vars.$pd4;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: vars.$pd * 10;
+  // width: 100%;
+}
+.movie {
+  background: vars.$light_gray;
+  border: 1px solid vars.$white;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  min-width: 270px;
+  min-height: 400px;
+  width: 270px;
+  height: 400px;
+  padding: vars.$pd2;
+
+  .poster {
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  .info {
+    display: flex;
+    flex-direction: column;
+    gap: vars.$pd2;
+    overflow: hidden;
+    h3 {
+      color: vars.$white;
+    }
+  }
+  .genresWrapper {
+    display: flex;
+    gap: vars.$pd;
+    flex-wrap: wrap;
+    overflow: hidden;
+
+    span {
+      color: vars.$light_gray;
+    }
+  }
+}
+.opacity {
+  opacity: 0.4;
+}
+.selected {
+  border: 1px solid vars.$orange !important;
+}
+.footer {
+  padding: vars.$pd5 0;
+}
+
+.hr {
+  height: 1px;
+  box-sizing: border-box;
+  width: 100%;
+  opacity: 0.1;
+  background: linear-gradient(
+    270deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgb(255, 255, 255) 50%,
+    rgba(255, 255, 255, 0.1) 100%
+  );
+}

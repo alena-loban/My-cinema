@@ -24,13 +24,13 @@ enum Role {
 
 model Movie {
   id                            Int       @id @default(autoincrement())
-  kinopoiskId                   Int       @unique
+  kinopoiskId                   Int?       @unique
   kinopoiskHDId                 String?
   imdbId                        String?
-  nameRu                        String
+  nameRu                        String?
   nameEn                        String?
   nameOriginal                  String?
-  year                          Int
+  year                          Int?
   posterUrl                     String?
   posterUrlPreview              String?
   coverUrl                      String?
@@ -49,24 +49,24 @@ model Movie {
   ratingRfCritics               Float?
   ratingRfCriticsVoteCount      Int?
   webUrl                        String?
-  filmLength                    Int
-  slogan                        String
-  description                   String
-  shortDescription              String
-  editorAnnotation              String
-  isTicketsAvailable            Boolean
+  filmLength                    Int?
+  slogan                        String?
+  description                   String?
+  shortDescription              String?
+  editorAnnotation              String?
+  isTicketsAvailable            Boolean?
   productionStatus              String?
-  type                          String
+  type                          String?
   ratingMpaa                    String?
-  ratingAgeLimits               String
+  ratingAgeLimits               String?
   hasImax                       Boolean?
-  has3D                         Boolean
-  lastSync                      String
-  startYear                     Int
-  endYear                       Int
-  serial                        Boolean
-  shortFilm                     Boolean
-  completed                     Boolean
+  has3D                         Boolean?
+  lastSync                      String?
+  startYear                     Int?
+  endYear                       Int?
+  serial                        Boolean?
+  shortFilm                     Boolean?
+  completed                     Boolean?
 
   countries   Country[] 
   genres      Genre[]   
@@ -81,7 +81,6 @@ model Country {
   country  String
   movie     Movie      @relation(fields: [movieId], references: [id])
   movieId   Int 
-
 }
 
 model Genre {

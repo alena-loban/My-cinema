@@ -1,7 +1,7 @@
 import { getServerSession } from 'next-auth';
 import Navigation from '../utils/navigation';
-import { authConfig } from '@/configs/auth';
 import { signOut } from 'next-auth/react';
+import { authConfig } from '@/shared/config/auth';
 
 const Header = async () => {
   const session = await getServerSession(authConfig);
@@ -39,16 +39,9 @@ const Header = async () => {
       // onClick: () => signOut({ callbackUrl: '/' }),
     },
   ];
+  console.log(session);
   return (
-    <header
-      style={{
-        padding: '20px',
-        backgroundColor: 'gray',
-        display: 'flex',
-        gap: '10px',
-        justifyContent: 'center',
-      }}
-    >
+    <header>
       <Navigation links={navLinks} />
     </header>
   );

@@ -1,0 +1,86 @@
+@use '@/shared/config/styles/vars';
+.button {
+  background-color: vars.$orange;
+  color: vars.$white;
+  transition: all 0.1s ease-in 0.1s;
+  border: none;
+  border-radius: vars.$pd2;
+  height: fit-content;
+  padding: vars.$pd2;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  font-size: 16px;
+
+  &:hover:not(:disabled) {
+    color: vars.$orange !important;
+    background-color: vars.$white !important;
+    border: none !important;
+  }
+  &:disabled {
+    background-color: vars.$light_gray;
+    color: vars.$light_gray !important;
+  }
+}
+
+.checkbox {
+  :global(.ant-checkbox) {
+    border: none;
+    overflow: hidden;
+    width: 20px;
+    height: 20px;
+  }
+
+  :global(.ant-checkbox-inner) {
+    width: 100%;
+    height: 100%;
+    background-color: vars.$light_gray;
+    border: none;
+  }
+  :global(.ant-checkbox-checked .ant-checkbox-inner) {
+    background-color: vars.$orange !important;
+    border: none;
+  }
+}
+
+.searchInput {
+  width: 100%;
+  // height: 100%;
+  border-bottom: 2px solid vars.$light_gray !important;
+  input &::placeholder {
+    color: vars.$light_gray !important;
+  }
+
+  &:global(.ant-input) {
+    border-bottom: 2px solid gray !important;
+    color: vars.$light_gray !important;
+  }
+  &:global(.ant-input-affix-wrapper) {
+    box-shadow: none;
+    input {
+      height: 40px;
+      &::placeholder {
+        color: vars.$light_gray !important;
+        opacity: 0.5;
+      }
+    }
+  }
+  &:global(.ant-input-outlined) {
+    border: none;
+    border-radius: 0;
+    background-color: transparent !important;
+    color: vars.$light_gray !important;
+    font-size: 18px !important;
+  }
+  :global(.ant-input-suffix) {
+    svg {
+      fill: vars.$light_gray;
+      width: 18px;
+      height: 18px;
+    }
+  }
+  :global(.ant-input-prefix) {
+    opacity: 0.4;
+    padding-right: vars.$pd2;
+  }
+}

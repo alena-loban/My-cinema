@@ -15,6 +15,8 @@ type Props = {
 
 const Navigation = ({ links }: Props) => {
   const pathName = usePathname();
+  const session = useSession();
+  console.log(session);
 
   const filteredLinks = useMemo(() => {
     return links.filter(({ enabled }) => enabled);
@@ -34,16 +36,14 @@ const Navigation = ({ links }: Props) => {
           </Link>
         );
       })}
-      {/* {session?.data?.user?.role === 'ADMIN' && (
-        <Link href={'/admin'}>Admin</Link>
-      )}
-      {session?.data ? (
-        <Link href={'#'} onClick={() => signOut({ callbackUrl: '/' })}>
-          SignOut
+      {session?.user?.role === 'ADMIN' && <Link href={'/admin'}>Admin</Link>}
+      {/* {session?.data ? ( 
+     <Link href={'#'} onClick={() => signOut({ callbackUrl: '/' })}>
+         SignOut
         </Link>
       ) : (
-        <Link href={'/api/auth/signin'}>SignIn</Link>
-      )} */}
+       <Link href={'/api/auth/signin'}>SignIn</Link>
+       )} */}
     </>
   );
 };

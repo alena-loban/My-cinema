@@ -1,0 +1,20 @@
+@use '@/shared/config/styles/vars';
+.hr {
+  height: 1px;
+  box-sizing: border-box;
+  width: 100%;
+  opacity: 0.1;
+  background: linear-gradient(
+    270deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgb(255, 255, 255) 50%,
+    rgba(255, 255, 255, 0.1) 100%
+  );
+}
+.page {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  overflow: hidden;
+}

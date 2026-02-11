@@ -1,12 +1,6 @@
 'use server';
-import { prisma } from '@/lib/prisma';
-import {
-  Countries,
-  DetailMovie,
-  KinopoiskMovie,
-  Photos,
-  Genres,
-} from '../../types';
+import { prisma } from '@/shared/lib/prisma';
+import { DetailMovie, KinopoiskMovie, Photos, Movie } from '../../types';
 
 type Params = {
   year: number;
@@ -71,12 +65,7 @@ export const getMoviePhotos = async (
   });
 };
 
-type ExtraInfo = {
-  photos: Photos[];
-  countries: Countries[];
-  genres: Genres[];
-  movies: Omit<DetailMovie, 'countries' | 'genres'>[];
-};
+type ExtraInfo = Omit<Movie, 'id'>[];
 
 export const getExtraMoviesInfo = async (ids: number[]): Promise<ExtraInfo> => {
   const total = ids.length;
@@ -85,12 +74,7 @@ export const getExtraMoviesInfo = async (ids: number[]): Promise<ExtraInfo> => {
   let completed = 0;
   const limit = Math.min(5, total);
 
-  const result: ExtraInfo = {
-    photos: [],
-    countries: [],
-    genres: [],
-    movies: [],
-  };
+  const result: ExtraInfo = [];
 
   return new Promise(resolve => {
     function next() {
@@ -106,23 +90,8 @@ export const getExtraMoviesInfo = async (ids: number[]): Promise<ExtraInfo> => {
           .then(res => {
             const [info, posters] = res;
             if (info.status === 'fulfilled' && posters.status === 'fulfilled') {
-              const { countries, genres, ...rest } = info.value;
-              const mappedCountries = countries.map(country => ({
-                ...country,
-                movieId: currentId,
-              }));
-              const mappedGenres = genres.map(genre => ({
-                ...genre,
-                movieId: currentId,
-              }));
-              const mappedPosters = posters.value.items.map(poster => ({
-                ...poster,
-                movieId: currentId,
-              }));
-              result.countries.push(...mappedCountries);
-              result.genres.push(...mappedGenres);
-              result.movies.push(rest);
-              result.photos.push(...mappedPosters);
+              const currentMovie = info.value;
+              result.push({ ...currentMovie, photos: posters.value.items });
             }
           })
           .finally(() => {
@@ -139,18 +108,4 @@ export const getExtraMoviesInfo = async (ids: number[]): Promise<ExtraInfo> => {
 
     next();
   });
-};
-
-export const loadMovies = async (ids: number[]) => {
-  const { countries, genres, movies, photos } = await getExtraMoviesInfo(ids);
-  try {
-    // await prisma.$transaction([
-    //   prisma.country.createMany({ data: countries }),
-    //   prisma.genre.createMany({ data: genres }),
-    //   prisma.movie.createMany({ data: movies }),
-    //   prisma.photo.createMany({ data: photos }),
-    // ]);
-  } catch (e) {
-    console.log(e);
-  }
 };

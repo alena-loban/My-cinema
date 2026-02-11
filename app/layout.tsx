@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
-import './globals.css';
+import './globals.scss';
 import cln from 'classnames';
 import Providers from '@/providers';
 import { Header, Footer } from '@/components';
@@ -26,14 +26,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={cln(geistSans.variable, geistMono.variable, 'body')}>
-        <Providers>
+    <html lang="ru">
+      <Providers>
+        <body className={cln(geistSans.variable, geistMono.variable, 'body')}>
           <Header />
-          <main style={{ flex: '1' }}>{children}</main>
+          <main className="mainContainer">{children}</main>
           <Footer />
-        </Providers>
-      </body>
+        </body>
+      </Providers>
     </html>
   );
 }
